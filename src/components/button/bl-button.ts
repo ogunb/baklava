@@ -127,6 +127,9 @@ export default class BlButton extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this.form = this.closest('form');
+    this.addEventListener('click', () => {
+      console.log('this click');
+    });
   }
 
   private caretTemplate(): TemplateResult {
@@ -135,6 +138,7 @@ export default class BlButton extends LitElement {
   }
 
   private _handleClick() {
+    console.log('_handleClick');
     if (this.type === 'submit' && this.form) {
       submit(this.form);
     }
@@ -166,6 +170,18 @@ export default class BlButton extends LitElement {
       }
       return false;
     });
+  }
+
+  protected firstUpdated() {
+    this.button.addEventListener(
+      'click',
+      () => {
+        console.log('firstUpdated click');
+      },
+      {
+        capture: true,
+      }
+    );
   }
 
   render(): TemplateResult {

@@ -25,13 +25,23 @@
     </style>
   </head>
   <body>
-    <h1>Baklava Playground</h1>
+    <bl-button>button</bl-button>
 
-    <p>
-      Copy this file as playground/index.html and try your work here by running
-      <code>npm run serve</code>.
-    </p>
+    <pre class="log"></pre>
 
-    <bl-button>Baklava is ready</bl-button>
+    <script type="module">
+      const button = document.querySelector('bl-button');
+      const log = document.querySelector('.log');
+
+      button.addEventListener('bl-click', e => {
+        console.log('bl-click: ', e);
+        log.innerHTML += `bl-click: ${e}\n`;
+      });
+
+      button.addEventListener('click', e => {
+        console.log('click: ', e);
+        log.innerHTML += `click: ${e}\n`;
+      });
+    </script>
   </body>
 </html>
