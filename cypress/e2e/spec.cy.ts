@@ -8,8 +8,13 @@ describe('template spec', () => {
     cy.get('.event').should('contain', 'bl-click');
   });
 
-  it('fail shadow', () => {
+  it('fail shadow .trigger', () => {
     cy.get('bl-button').shadow().find('button').trigger('click');
+    cy.get('.event').should('contain', 'bl-click');
+  });
+
+  it('fail shadow .click', () => {
+    cy.get('bl-button').shadow().find('button').click();
     cy.get('.event').should('contain', 'bl-click');
   });
 
