@@ -1,0 +1,19 @@
+#bl-notification-container-wrapper {
+  --bl-notification-container-gap: 1vh;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--bl-notification-container-gap);
+  width: calc(100% - (var(--bl-notification-container-gap) * 2));
+  position: fixed;
+  bottom: var(--bl-notification-container-gap);
+}
+
+@media screen and (min-width: 768px) {
+  #bl-notification-container-wrapper {
+    bottom: auto;
+    top: var(--bl-notification-container-gap);
+    right: var(--bl-notification-container-gap);
+    width: 364px;
+  }
+}

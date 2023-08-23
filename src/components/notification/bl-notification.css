@@ -1,0 +1,28 @@
+:host-context(#bl-notification-container-wrapper) .notification {
+  will-change: transform;
+  animation: fade-in 0.3s ease, slide-in 0.3s ease;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateY(var(--travel-distance, 10px));
+  }
+}
+
+@keyframes slide-out {
+  to {
+    transform: translateX(var(--travel-distance, 10px));
+  }
+}

@@ -8,8 +8,9 @@
     <script type="module" src="./dist/baklava.js"></script>
     <script>
       // Live reload
-      new EventSource('/esbuild').addEventListener('change', () => location.reload());
+      new EventSource("/esbuild").addEventListener("change", () => location.reload());
     </script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <style>
       *:not(:defined) {
         display: none;
@@ -31,7 +32,122 @@
       Copy this file as playground/index.html and try your work here by running
       <code>npm run serve</code>.
     </p>
+    <div id="app">
+      <bl-notification-container></bl-notification-container>
 
-    <bl-button>Baklava is ready</bl-button>
+      <bl-notification
+        v-if="message"
+        :caption="message"
+        description="This is a notification"
+        variant="info"
+        icon
+      ></bl-notification>
+
+      <bl-notification
+        id="asd"
+        caption="Welcome to Baklava!"
+        description="This is a notification"
+        variant="info"
+        icon
+      ></bl-notification>
+
+      <bl-notification
+        caption="Welcome to Baklava!"
+        description="This is a notification"
+        variant="info"
+        icon
+      ></bl-notification>
+
+      <bl-notification
+        caption="Welcome to Baklava!"
+        description="This is a notification"
+        variant="info"
+        icon
+      ></bl-notification>
+    </div>
+
+    <script>
+      const { createApp, ref } = Vue;
+
+      createApp({
+        setup() {
+          const message = ref("Hello vue!");
+
+          setTimeout(() => {
+            message.value = "Hello vue 2!";
+          }, 2000);
+
+          setTimeout(() => {
+            message.value = null;
+          }, 4000);
+
+          setTimeout;
+          return {
+            message,
+          };
+        },
+      }).mount("#app");
+    </script>
+
+    <script>
+      customElements.whenDefined("bl-notification").then(() => {
+        setTimeout(() => {
+          const el = document.getElementById("asd");
+
+          el.caption = "ASDUIHASIUDASD";
+        }, 2000);
+      });
+      customElements.whenDefined("bl-notification-container").then(promise => {
+        const el = document.querySelector("bl-notification-container");
+
+        el.addNotification({
+          caption: "Welcome to Baklava!",
+          description: "This is a notification",
+          variant: "info",
+          icon: true,
+          action: {
+            label: "Action",
+            onClick: notification => {
+              el.removeNotification(notification.id);
+            },
+          },
+        });
+
+        setTimeout(() => {
+          el.addNotification({
+            caption: "Welcome to Baklava!",
+            description: "This is a notification",
+            variant: "success",
+            icon: true,
+            action: {
+              secondary: {
+                label: "Secondary",
+                onClick: notification => {
+                  el.removeNotification(notification.id);
+                },
+              },
+            },
+          });
+        }, 2000);
+
+        setTimeout(() => {
+          el.addNotification({
+            caption: "Welcome to Baklava!",
+            description: "This is a notification",
+            variant: "warning",
+            icon: true,
+          });
+        }, 4000);
+
+        setTimeout(() => {
+          el.addNotification({
+            caption: "Welcome to Baklava!",
+            description: "This is a notification",
+            variant: "danger",
+            icon: true,
+          });
+        }, 6000);
+      });
+    </script>
   </body>
 </html>
